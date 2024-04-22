@@ -1,0 +1,20 @@
+version: '3'
+services:
+  ssh-client:
+    build:
+      context: .
+      dockerfile: Dockerfile_client
+    volumes:
+      - ./ssh-keys:/root/.ssh
+    entrypoint: /bin/bash
+    tty: true
+    # command: -c "ssh -i /root/.ssh/id_rsa -o StrictHostKeyChecking=no root@ssh-server"
+  ssh-server:
+    build:
+      context: .
+      dockerfile: Dockerfile_server
+    volumes:
+      - ./ssh-keys:/root/.ssh
+    entrypoint: /bin/bash
+    tty: true
+    # command: -c "service ssh start; tail -f /dev/null"

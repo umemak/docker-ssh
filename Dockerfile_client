@@ -1,0 +1,9 @@
+FROM php:7.3-apache-buster
+
+# Install SSH client
+RUN apt-get update && apt-get install -y openssh-client
+
+# Add SSH key
+RUN mkdir /root/.ssh
+COPY id_rsa /root/.ssh/id_rsa
+RUN chmod 600 /root/.ssh/id_rsa

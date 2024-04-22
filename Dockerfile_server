@@ -1,0 +1,15 @@
+FROM php:7.3-apache-buster
+
+# Install SSH server
+RUN apt-get update && apt-get install -y openssh-server
+
+# Create SSH user
+RUN useradd -m -s /bin/bash sshuser
+
+# Set SSH password
+RUN echo "sshuser:password" | chpasswd
+
+# Add SSH key
+RUN mkdir /home/sshuser/.ssh
+COPY id_rsa /home/sshuser/.ssh/id_rsa
+RUN chmod 600 /home/sshuser/.ssh/id_rsa
